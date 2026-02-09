@@ -138,6 +138,10 @@ This project successfully integrates data visualization with containerization te
 ---
 
 ## Authors
-Kshitij Gupta
-CSE / Manipal University Jaipur
+Kshitij Gupta |
+CSE / Manipal University Jaipur |
 GitHub: https://github.com/tango-kshitij
+
+Aaditya Jagdish |
+CSE / Manipal University Jaipur |
+GitHub: https://github.com/AadiJag
