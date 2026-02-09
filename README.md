@@ -32,7 +32,7 @@ This project demonstrates how data visualization applications can be packaged an
 ---
 
 ## Project Structure
-
+```
 docker-dashboard/
 │
 ├── app.py # Main application file
@@ -40,7 +40,7 @@ docker-dashboard/
 ├── requirements.txt # Python dependencies
 ├── Dockerfile # Docker configuration
 └── README.md # Project documentation
-
+```
 
 ---
 
@@ -59,66 +59,77 @@ docker-dashboard/
 
 ## How to Run the Project
 
-### Prerequisites
+### 1. Prerequisites
 - Docker installed on your system  
 - Internet connection (for initial image build)
-
-Verify Docker installation:
-```bash
+- Verify Docker installation:
+```
+bash
 docker --version
+```
 
+---
 
-### Clone the repository
+### 2. Clone the repository
 git clone https://github.com/your-username/dockerized-data-visualization-dashboard.git
 cd dockerized-data-visualization-dashboard
 
+---
 
-### Build the Docker image
+### 3. Build the Docker image
 docker build -t data-dashboard .
 
+---
 
-### Run the Docker Container
+### 4. Run the Docker Container
 docker run -p 8501:8501 data-dashboard
 
+---
 
-### Access the Dashboard
+### 5. Access the Dashboard
 http://localhost:8501
 
+---
 
-### How It Works
+## How It Works
 The dataset (data.csv) is loaded using Pandas
 Streamlit provides a web-based dashboard interface
 Matplotlib generates visualizations
 Docker packages the application and dependencies
 The container runs the dashboard consistently on any system
 
+---
 
-### Expected Output
+## Expected Output
 A web dashboard displaying the dataset
 Visual graphs representing data trends and distributions
 Docker container running the application successfully
 
+---
 
-### Applications
+## Applications
 Academic data analysis projects
 Business and sales analytics
 Environmental and weather data analysis
 Learning Docker and DevOps basics
 
+---
 
-### Future Enhancements
+## Future Enhancements
 Real-time data integration
 Cloud deployment
 Advanced interactive charts
 User authentication
 Database integration
 
+---
 
-### Conclusion
+## Conclusion
 This project successfully integrates data visualization with containerization technology. By using Docker, the application becomes portable, scalable, and easy to deploy, addressing common challenges in traditional software deployment. The project provides hands-on experience with Python, data visualization, and DevOps concepts.
 
+---
 
-### Author
+## Author
 Kshitij Gupta
 CSE / Manipal University Jaipur
 GitHub: https://github.com/tango-kshitij
