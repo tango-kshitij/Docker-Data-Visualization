@@ -71,23 +71,31 @@ docker --version
 ---
 
 ### 2. Clone the repository
+```
 git clone https://github.com/your-username/dockerized-data-visualization-dashboard.git
 cd dockerized-data-visualization-dashboard
+```
 
 ---
 
 ### 3. Build the Docker image
+```
 docker build -t data-dashboard .
+```
 
 ---
 
 ### 4. Run the Docker Container
+```
 docker run -p 8501:8501 data-dashboard
+```
 
 ---
 
 ### 5. Access the Dashboard
+```
 http://localhost:8501
+```
 
 ---
 
