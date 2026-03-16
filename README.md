@@ -35,11 +35,11 @@ This project demonstrates how data visualization applications can be packaged an
 ```
 docker-dashboard/
 │
-├── app.py # Main application file
-├── data.csv # Sample dataset
-├── requirements.txt # Python dependencies
-├── Dockerfile # Docker configuration
-└── README.md # Project documentation
+├── app.py                  # Main application file
+├── data.csv                # Sample dataset
+├── requirements.txt        # Python dependencies
+├── Dockerfile              # Docker configuration
+└── README.md               # Project documentation
 ```
 
 ---
