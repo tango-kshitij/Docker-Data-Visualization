@@ -35,8 +35,14 @@ This project demonstrates how data visualization applications can be packaged an
 ```
 docker-dashboard/
 │
+├── datasets/
+│   ├── sales_data.csv
+│   ├── weather_data.csv
+│   ├── student_scores.csv
+│   ├── crop_production.csv
+│   └── company_employees.csv
+│
 ├── app.py                  # Main application file
-├── data.csv                # Sample dataset
 ├── requirements.txt        # Python dependencies
 ├── Dockerfile              # Docker configuration
 └── README.md               # Project documentation
@@ -51,6 +57,7 @@ docker-dashboard/
   - Line chart
   - Bar chart
   - Pie chart
+  - Scatter Plot
 - Interactive web-based dashboard
 - Fully containerized application
 - Platform-independent execution
@@ -100,7 +107,7 @@ http://localhost:8501
 ---
 
 ## How It Works
-The dataset (data.csv) is loaded using Pandas
+The dataset selected is loaded using Pandas
 Streamlit provides a web-based dashboard interface
 Matplotlib generates visualizations
 Docker packages the application and dependencies
