@@ -31,7 +31,8 @@ This project demonstrates how data visualization applications can be packaged an
 
 ---
 
-## Project Structure
+## Project Folder Structure
+
 ```
 docker-dashboard/
 │
