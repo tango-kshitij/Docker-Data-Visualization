@@ -32,7 +32,6 @@ if uploaded_file is not None:
         ["Line", "Bar", "Scatter", "Pie"]
     )
 
-    # Filter option
     st.sidebar.subheader("Filter Data")
 
     use_filter = st.sidebar.checkbox("Enable Filter")
@@ -57,17 +56,25 @@ if uploaded_file is not None:
         col2.metric("Average", round(data[y_col].mean(), 2))
         col3.metric("Max", int(data[y_col].max()))
 
+    if x_col != y_col:
+        grouped_data = data.groupby(x_col)[y_col].sum().reset_index()
+    else:
+        grouped_data = data.copy()
+
     st.subheader("Visualization")
     fig, ax = plt.subplots()
 
     if chart_type == "Line":
-        ax.plot(data[x_col], data[y_col], marker='o')
+        ax.plot(grouped_data[x_col], grouped_data[y_col], marker='o')
+
     elif chart_type == "Bar":
-        ax.bar(data[x_col], data[y_col])
+        ax.bar(grouped_data[x_col], grouped_data[y_col])
+
     elif chart_type == "Scatter":
         ax.scatter(data[x_col], data[y_col])
+
     elif chart_type == "Pie":
-        ax.pie(data[y_col], labels=data[x_col], autopct='%1.1f%%')
+        ax.pie(grouped_data[y_col], labels=grouped_data[x_col], autopct='%1.1f%%')
 
     ax.set_xlabel(x_col)
     ax.set_ylabel(y_col)
