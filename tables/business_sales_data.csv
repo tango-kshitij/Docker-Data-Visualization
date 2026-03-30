@@ -1,0 +1,17 @@
+Region,Category,Product,Month,Sales,Profit
+North,Electronics,Laptop,Jan,50000,8000
+North,Electronics,Mobile,Feb,30000,5000
+North,Furniture,Chair,Mar,15000,2000
+South,Electronics,Laptop,Jan,45000,7000
+South,Furniture,Table,Feb,20000,3000
+South,Clothing,Shirt,Mar,12000,1500
+East,Electronics,Mobile,Jan,28000,4000
+East,Clothing,Jeans,Feb,18000,2500
+East,Furniture,Sofa,Mar,25000,3500
+West,Electronics,Laptop,Jan,52000,9000
+West,Clothing,T-Shirt,Feb,14000,1800
+West,Furniture,Chair,Mar,16000,2200
+North,Clothing,Jacket,Apr,22000,3000
+South,Electronics,Tablet,Apr,27000,4200
+East,Furniture,Table,Apr,23000,3100
+West,Electronics,Mobile,Apr,31000,4800
