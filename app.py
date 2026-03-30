@@ -2,11 +2,15 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 
-st.title("Automatic CSV Data Visualization Dashboard")
 
-st.write("Upload any CSV file and generate charts automatically.")
+st.set_page_config(page_title="Data Visualizer Dashboard", layout="wide")
 
-uploaded_file = st.file_uploader("Upload CSV File", type=["csv"])
+st.title("Data Visualization Dashboard")
+st.markdown("Upload any CSV file")
+
+st.sidebar.header("Controls")
+
+uploaded_file = st.sidebar.file_uploader("Upload CSV File", type=["csv"])
 
 if uploaded_file is not None:
     
@@ -15,40 +19,69 @@ if uploaded_file is not None:
     st.subheader("Dataset Preview")
     st.dataframe(data)
 
-    columns = data.columns.tolist()
+    numeric_cols = data.select_dtypes(include=['int64', 'float64']).columns.tolist()
+    categorical_cols = data.select_dtypes(include=['object']).columns.tolist()
 
-    st.subheader("Select Columns for Visualization")
+    st.sidebar.subheader("Chart Settings")
+    
+    x_col = st.sidebar.selectbox("Select X-axis", data.columns)
+    y_col = st.sidebar.selectbox("Select Y-axis", numeric_cols)
 
-    x_column = st.selectbox("Select X-axis", columns)
-    y_column = st.selectbox("Select Y-axis", columns)
-
-    chart_type = st.selectbox(
-        "Select Chart Type",
-        ["Line Chart", "Bar Chart", "Scatter Plot", "Pie Chart"]
+    chart_type = st.sidebar.selectbox(
+        "Chart Type",
+        ["Line", "Bar", "Scatter", "Pie"]
     )
 
+    # Filter option
+    st.sidebar.subheader("Filter Data")
+
+    use_filter = st.sidebar.checkbox("Enable Filter")
+
+    if use_filter and categorical_cols:
+        filter_col = st.sidebar.selectbox("Filter Column", categorical_cols)
+        filter_val = st.sidebar.selectbox(
+            "Select Value",
+            data[filter_col].unique()
+        )
+        data = data[data[filter_col] == filter_val]
+
+    elif use_filter and not categorical_cols:
+        st.sidebar.warning("No categorical columns available for filtering")
+
+    st.subheader("Key Metrics")
+    
+    col1, col2, col3 = st.columns(3)
+
+    if numeric_cols:
+        col1.metric("Total", int(data[y_col].sum()))
+        col2.metric("Average", round(data[y_col].mean(), 2))
+        col3.metric("Max", int(data[y_col].max()))
+
+    st.subheader("Visualization")
     fig, ax = plt.subplots()
 
-    if chart_type == "Line Chart":
-        ax.plot(data[x_column], data[y_column], marker='o')
-        ax.set_xlabel(x_column)
-        ax.set_ylabel(y_column)
-        ax.set_title(f"{y_column} vs {x_column}")
+    if chart_type == "Line":
+        ax.plot(data[x_col], data[y_col], marker='o')
+    elif chart_type == "Bar":
+        ax.bar(data[x_col], data[y_col])
+    elif chart_type == "Scatter":
+        ax.scatter(data[x_col], data[y_col])
+    elif chart_type == "Pie":
+        ax.pie(data[y_col], labels=data[x_col], autopct='%1.1f%%')
 
-    elif chart_type == "Bar Chart":
-        ax.bar(data[x_column], data[y_column])
-        ax.set_xlabel(x_column)
-        ax.set_ylabel(y_column)
-        ax.set_title(f"{y_column} vs {x_column}")
-
-    elif chart_type == "Scatter Plot":
-        ax.scatter(data[x_column], data[y_column])
-        ax.set_xlabel(x_column)
-        ax.set_ylabel(y_column)
-        ax.set_title(f"{y_column} vs {x_column}")
-
-    elif chart_type == "Pie Chart":
-        ax.pie(data[y_column], labels=data[x_column], autopct='%1.1f%%')
-        ax.set_title(f"{y_column} Distribution")
+    ax.set_xlabel(x_col)
+    ax.set_ylabel(y_col)
+    ax.set_title(f"{y_col} vs {x_col}")
 
     st.pyplot(fig)
+
+    if len(numeric_cols) >= 2:
+        st.subheader("Extra Insight: Scatter Between Numeric Columns")
+        fig2, ax2 = plt.subplots()
+        ax2.scatter(data[numeric_cols[0]], data[numeric_cols[1]])
+        ax2.set_xlabel(numeric_cols[0])
+        ax2.set_ylabel(numeric_cols[1])
+        st.pyplot(fig2)
+
+else:
+    st.info("Upload a CSV file from the sidebar to get started")
